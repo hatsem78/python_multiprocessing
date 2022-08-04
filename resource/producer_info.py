@@ -16,11 +16,10 @@ class ProducerInfo:
     def main(self):
         asyncio.run(self.start_main())
 
-    @staticmethod
-    async def start_main():
+    async def start_main(self):
         # run for ever
         while True:
             # block for a moment
             time.sleep(1)
             # report a message
-            print('Task is running', flush=True)
+            logger.debug(f'Task: {self.site_id} is running')

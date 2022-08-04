@@ -24,4 +24,5 @@ async def status_task(
 
     if jobs[task.value].result.is_alive():
         msg = f"Diff Checker Site {task.value} is progress"
+
     return msg

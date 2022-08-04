@@ -25,10 +25,10 @@ async def run_in_process(fn, *args):
     return await loop.run_in_executor(app.state.executor, fn, *args)  # wait and return result
 
 
-def delete_all_mark(jobs):
-    for job in jobs:
-        jobs[job].result.stopped.set()
-        print(job)
+def delete_all_mark(list_jobs):
+    for job in list_jobs:
+        list_jobs[job].result.kill()
+        logger.debug(f"shutdown processor: {job}")
 
 
 @app.on_event("startup")
@@ -39,4 +39,3 @@ async def startup_event():
 @app.on_event("shutdown")
 async def on_shutdown():
     delete_all_mark(jobs)
-    app.state.executor.shutdown()
